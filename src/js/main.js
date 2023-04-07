@@ -11,9 +11,10 @@ function handleForm() {
         if (verifyInput()) {
             return
         }
-
         createNewTask(title)
         clearInput()
+        focusInput()
+        
     })
 }
 
@@ -43,11 +44,19 @@ function createNewTask(taskTitleInput) {
     task.append(editRemoveContainer)
     task.append(taskTitle)
 
+    
     tasksContainer.appendChild(task)
+    buttonRemove.addEventListener('click', () => {
+        task.remove()
+    })
 }
 
 function clearInput() {
     taskTitle.value = ''
+}
+
+function focusInput() {
+    taskTitle.focus()
 }
 
 function verifyInput() {
@@ -55,3 +64,4 @@ function verifyInput() {
         return true
     }
 }
+
