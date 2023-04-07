@@ -7,7 +7,13 @@ function handleForm() {
     form.addEventListener('submit', (event) => {
         event.preventDefault()
         const title = taskTitle.value
+
+        if (verifyInput()) {
+            return
+        }
+
         createNewTask(title)
+        clearInput()
     })
 }
 
@@ -18,7 +24,6 @@ function createNewTask(taskTitleInput) {
 
     const editRemoveContainer = document.createElement('span')
     editRemoveContainer.className = 'edit-remove-container'
-
 
     const buttonEdit = document.createElement('p')
     buttonEdit.className = 'edit'
@@ -35,18 +40,18 @@ function createNewTask(taskTitleInput) {
     taskTitle.className = 'title-task'
     taskTitle.innerHTML = taskTitleInput
 
-
-
     task.append(editRemoveContainer)
     task.append(taskTitle)
 
     tasksContainer.appendChild(task)
+}
 
-    // <div class="task">
-    //     <span class="edit-remove-container">
-    //         <p class="edit">Edit</p>
-    //         <p class="remove">X</p>
-    //     </span>
-    //     <p class="title-task">Estudar JS studar JS studar JS</p>
-    // </div>
+function clearInput() {
+    taskTitle.value = ''
+}
+
+function verifyInput() {
+    if (taskTitle.value.length === 0) {
+        return true
+    }
 }
