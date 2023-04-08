@@ -3,7 +3,6 @@ import { createNewTask } from "./createNewTask.js"
 
 const form = document.querySelector('.to-do-container')
 const inputTask = document.querySelector('.task-title-input')
-const tasksContainer = document.querySelector('.tasks-container')
 
 export let taskList = []
 

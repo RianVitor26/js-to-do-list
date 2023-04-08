@@ -1,71 +1,61 @@
 const tasksContainer = document.querySelector('.tasks-container')
 
+function createTaskHTML(titleForTask) {
+    return `
+    <div class="task">
+      <span class="icons-container">
+        <i class="fa-solid fa-trash trash"></i>
+        <i class="fa-solid fa-pen pen"></i>
+        <input type="checkbox" class="checkbox">
+      </span>
+      <input type="text" class="task-title-output" value="${titleForTask}" maxLength="30" disabled>
+    </div>
+  `
+}
+
+function updateTaskList(taskList) {
+    localStorage.setItem('tasks', JSON.stringify(taskList))
+}
+
 export function createNewTask(titleForTask) {
-    const task = document.createElement('div')
-    task.className = 'task'
+    const taskElement = document.createElement('div')
+    taskElement.innerHTML = createTaskHTML(titleForTask)
+    const taskTitleElement = taskElement.querySelector('.task-title-output')
 
-    const iconsContainer = document.createElement('span')
-    iconsContainer.className = 'icons-container'
+    tasksContainer.appendChild(taskElement)
 
-    const penIcon = document.createElement('i')
-    penIcon.className = 'fa-solid fa-pen pen'
-
-    const trashIcon = document.createElement('i')
-    trashIcon.className = 'fa-solid fa-trash trash'
-
-    const checkbox = document.createElement('input')
-    checkbox.type = 'checkbox'
-    checkbox.className = 'checkbox'
-
-    iconsContainer.append(trashIcon)
-    iconsContainer.append(penIcon)
-    iconsContainer.append(checkbox)
-
-    const taskTitle = document.createElement('input')
-    taskTitle.className = 'task-title-output'
-    taskTitle.value = titleForTask
-    taskTitle.setAttribute('maxLength', 30)
-    taskTitle.disabled = true
-
-    task.append(iconsContainer)
-    task.append(taskTitle)
-
-    tasksContainer.appendChild(task)
-
-
+    const trashIcon = taskElement.querySelector('.trash')
     trashIcon.addEventListener('click', () => {
-        const taskName = taskTitle.value
-        const taskList = JSON.parse(localStorage.getItem("tasks"))
+        const taskName = taskTitleElement.value
+        const taskList = JSON.parse(localStorage.getItem('tasks'))
         const index = taskList.indexOf(taskName)
         taskList.splice(index, 1)
-        localStorage.setItem("tasks", JSON.stringify(taskList))
-        task.remove()
+        updateTaskList(taskList)
+        taskElement.remove()
     })
 
+    const penIcon = taskElement.querySelector('.pen')
     penIcon.addEventListener('click', () => {
-        taskTitle.disabled = false
-        taskTitle.focus()
-
+        taskTitleElement.disabled = false
+        taskTitleElement.focus()
     })
-
-    let oldTaskTitle = taskTitle.value
-    taskTitle.addEventListener('blur', () => {
-        taskTitle.disabled = true
-        const newTaskTitle = taskTitle.value
+    
+    taskTitleElement.addEventListener('blur', () => {
+        taskTitleElement.disabled = true
+        const newTaskTitle = taskTitleElement.value
         const taskList = JSON.parse(localStorage.getItem('tasks'))
-        const index = taskList.indexOf(oldTaskTitle)
+        const index = taskList.indexOf(titleForTask)
         taskList.splice(index, 1, newTaskTitle)
-        localStorage.setItem('tasks', JSON.stringify(taskList))
+        updateTaskList(taskList)
     })
 
-    checkbox.addEventListener('change', (event) => {
-        if (event.target.checked) {
-            taskTitle.style.textDecoration = 'line-through'
-            tasksContainer.prepend(task)
+    const checkbox = taskElement.querySelector('.checkbox')
+    checkbox.addEventListener('change', () => {
+        if (checkbox.checked) {
+            taskTitleElement.style.textDecoration = 'line-through'
+            tasksContainer.prepend(taskElement)
+        } else {
+            taskTitleElement.style.textDecoration = 'none'
         }
-        else {
-            taskTitle.style.textDecoration = 'none'
-       }
-       
     })
 }
