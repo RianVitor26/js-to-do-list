@@ -36,6 +36,7 @@ function createNewTask(taskTitleInput) {
     const taskTitle = document.createElement('input')
     taskTitle.className = 'task-title-output'
     taskTitle.value = taskTitleInput
+    taskTitle.setAttribute('maxLength', 30)
     taskTitle.disabled = true
 
     task.append(editRemoveContainer)
@@ -50,6 +51,10 @@ function createNewTask(taskTitleInput) {
     buttonEdit.addEventListener('click', () => {
         taskTitle.disabled = false
         taskTitle.focus()
+    })
+
+    taskTitle.addEventListener('blur', () => {
+        taskTitle.disabled = true
     })
 }
 
