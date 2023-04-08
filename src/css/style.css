@@ -7,8 +7,8 @@
 
 :root {
     --primary: #8257e5;
-    --edit: #04d361;
-    --remove: #e83f5b;
+    --pen: #04d361;
+    --trash: #e83f5b;
     --dark-text: #3a3a3a;
     --light-text: whitesmoke;
 }
@@ -96,7 +96,7 @@ body {
     padding: .5rem;
 }
 
-.to-do-container .tasks-container .task .edit-remove-container {
+.to-do-container .tasks-container .task .icons-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -105,8 +105,8 @@ body {
     margin-right: 1rem;
 }
 
-.to-do-container .tasks-container .task .edit-remove-container .edit,
-.to-do-container .tasks-container .task .edit-remove-container .remove {
+.to-do-container .tasks-container .task .icons-container .pen,
+.to-do-container .tasks-container .task .icons-container .trash {
     width: 50%;
     height: 100%;
     display: flex;
@@ -115,14 +115,21 @@ body {
     cursor: pointer;
 }
 
-.edit {
-    color: var(--edit);
-    margin-left: 1rem;
+.pen {
+    color: var(--pen);
+    margin: 0 1rem;
 }
 
-.remove {
-    color: var(--remove);
+.trash {
+    color: var(--trash);
 }
+
+.checkbox {
+    cursor: pointer;
+    width: 3rem;
+    height: 3rem;
+}
+
 
 i {
     font-size: 1.5rem;
