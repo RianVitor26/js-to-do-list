@@ -3,7 +3,9 @@ import { createNewTask } from "./createNewTask.js"
 
 const form = document.querySelector('.to-do-container')
 const inputTask = document.querySelector('.task-title-input')
-let taskList = []
+const tasksContainer = document.querySelector('.tasks-container')
+
+export let taskList = []
 
 createTasksFromLocalStorage()
 
@@ -14,7 +16,7 @@ function createTasksFromLocalStorage() {
     }
 
     if (savedTaskList[0] === null) return
-        
+
     savedTaskList.forEach(task => {
         createNewTask(task)
     })
@@ -30,7 +32,7 @@ function handleFormSubmitEvent() {
         const titleForTask = inputTask.value
 
         if (verifyInput()) return
-           
+
         createNewTask(titleForTask)
         saveTaskOnLocalStorage(titleForTask)
         clearInput()

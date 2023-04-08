@@ -34,6 +34,11 @@ export function createNewTask(titleForTask) {
 
 
     trashIcon.addEventListener('click', () => {
+        const taskName = taskTitle.value
+        const taskList = JSON.parse(localStorage.getItem("tasks"))
+        const index = taskList.indexOf(taskName)
+        taskList.splice(index, 1)
+        localStorage.setItem("tasks", JSON.stringify(taskList))
         task.remove()
     })
 
@@ -43,8 +48,14 @@ export function createNewTask(titleForTask) {
 
     })
 
+    let oldTaskTitle = taskTitle.value
     taskTitle.addEventListener('blur', () => {
         taskTitle.disabled = true
+        const newTaskTitle = taskTitle.value
+        const taskList = JSON.parse(localStorage.getItem('tasks'))
+        const index = taskList.indexOf(oldTaskTitle)
+        taskList.splice(index, 1, newTaskTitle)
+        localStorage.setItem('tasks', JSON.stringify(taskList))
     })
 
     checkbox.addEventListener('change', (event) => {
