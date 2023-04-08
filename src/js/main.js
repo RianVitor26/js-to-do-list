@@ -1,6 +1,6 @@
 const form = document.querySelector('.to-do-container')
 const tasksContainer = document.querySelector('.tasks-container')
-const taskTitle = document.querySelector('.task-title')
+const taskTitle = document.querySelector('.task-title-input')
 
 handleForm()
 function handleForm() {
@@ -14,10 +14,8 @@ function handleForm() {
         createNewTask(title)
         clearInput()
         focusInput()
-        
     })
 }
-
 
 function createNewTask(taskTitleInput) {
     const task = document.createElement('div')
@@ -26,28 +24,32 @@ function createNewTask(taskTitleInput) {
     const editRemoveContainer = document.createElement('span')
     editRemoveContainer.className = 'edit-remove-container'
 
-    const buttonEdit = document.createElement('p')
-    buttonEdit.className = 'edit'
-    buttonEdit.innerHTML = 'Edit'
+    const buttonEdit = document.createElement('i')
+    buttonEdit.className = 'fa-solid fa-pen edit'
 
-    const buttonRemove = document.createElement('p')
-    buttonRemove.className = 'remove'
-    buttonRemove.innerHTML = 'X'
+    const buttonRemove = document.createElement('i')
+    buttonRemove.className = 'fa-solid fa-trash remove'
 
-    editRemoveContainer.append(buttonEdit)
     editRemoveContainer.append(buttonRemove)
+    editRemoveContainer.append(buttonEdit)
 
-    const taskTitle = document.createElement('p')
-    taskTitle.className = 'title-task'
-    taskTitle.innerHTML = taskTitleInput
+    const taskTitle = document.createElement('input')
+    taskTitle.className = 'task-title-output'
+    taskTitle.value = taskTitleInput
+    taskTitle.disabled = true
 
     task.append(editRemoveContainer)
     task.append(taskTitle)
-
     
     tasksContainer.appendChild(task)
+
     buttonRemove.addEventListener('click', () => {
         task.remove()
+    })
+
+    buttonEdit.addEventListener('click', () => {
+        taskTitle.disabled = false
+        taskTitle.focus()
     })
 }
 
