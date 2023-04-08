@@ -50,6 +50,7 @@ export function createNewTask(titleForTask) {
     checkbox.addEventListener('change', (event) => {
         if (event.target.checked) {
             taskTitle.style.textDecoration = 'line-through'
+            tasksContainer.prepend(task)
         }
         else {
             taskTitle.style.textDecoration = 'none'
