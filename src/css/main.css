@@ -13,11 +13,9 @@
     --light-text: whitesmoke;
 }
 
-
 html {
     font-size: 62.5%;
 }
-
 
 body {
     width: 100%;
@@ -33,18 +31,19 @@ body {
     margin: 0 auto;
 }
 
-.to-do-container .logo{
+.to-do-container .logo {
     width: 15rem;
     height: 15rem;
 }
 
-.to-do-container .title{
+.to-do-container .title {
     font-family: sans-serif;
     text-decoration: line-through;
-    color: var(--dark-text);    
+    color: var(--dark-text);
 }
-.to-do-container .title::first-letter{
-    color: var(--primary);    
+
+.to-do-container .title::first-letter {
+    color: var(--primary);
 }
 
 .to-do-container .info {
@@ -128,11 +127,9 @@ body {
     height: 3rem;
 }
 
-
 i {
     font-size: 1.5rem;
 }
-
 
 .to-do-container .tasks-container .task .task-title-output {
     padding: 1rem;
