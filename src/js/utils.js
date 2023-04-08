@@ -1,15 +1,13 @@
-const taskTitle = document.querySelector('.task-title-input')
+export const taskTitle = document.querySelector('.task-title-input');
 
 export function clearInput() {
-    taskTitle.value = ''
+    taskTitle.value = '';
 }
 
 export function focusInput() {
-    taskTitle.focus()
+    taskTitle.focus();
 }
 
 export function verifyInput() {
-    if (taskTitle.value.length === 0) {
-        return true
-    }
+    return taskTitle.value.length === 0;
 }
