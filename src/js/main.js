@@ -3,27 +3,22 @@ import { createNewTask } from "./createNewTask.js"
 
 const form = document.querySelector('.to-do-container')
 const inputTask = document.querySelector('.task-title-input')
+const TASKS_KEY = 'tasks'
 
-export let taskList = []
+let taskList = []
 
-createTasksFromLocalStorage()
+init()
 
-function createTasksFromLocalStorage() {
-    let savedTaskList = JSON.parse(localStorage.getItem('tasks'))
-    if (!Array.isArray(savedTaskList)) {
-        savedTaskList = [savedTaskList]
-    }
-
-    if (savedTaskList[0] === null) return
-
-    savedTaskList.forEach(task => {
-        createNewTask(task)
-    })
-
-    taskList = savedTaskList
+function init() {
+    createTasksFromLocalStorage()
+    handleFormSubmitEvent()
 }
 
-handleFormSubmitEvent()
+function createTasksFromLocalStorage() {
+    const savedTaskList = JSON.parse(localStorage.getItem(TASKS_KEY)) || []
+    savedTaskList.forEach(createNewTask)
+    taskList = savedTaskList
+}
 
 function handleFormSubmitEvent() {
     form.addEventListener('submit', (event) => {
@@ -41,5 +36,5 @@ function handleFormSubmitEvent() {
 
 function saveTaskOnLocalStorage(titleForTask) {
     taskList.push(titleForTask)
-    localStorage.setItem('tasks', JSON.stringify(taskList))
+    localStorage.setItem(TASKS_KEY, JSON.stringify(taskList))
 }
